@@ -26,6 +26,8 @@ export const config = {
       async authorize(credentials) {
         if (credentials == null) return null;
 
+        console.log("authorize 2");
+
         // Find user in database
         const user = await prisma.user.findFirst({
           where: {
@@ -33,13 +35,16 @@ export const config = {
           },
         });
 
+        console.log("authorize 3");
+
         // Check if user exists and if the password matches
         if (user && user.password) {
+          console.log("authorize 4", user, user.password);
           const isMatch = await compare(
             credentials.password as string,
             user.password
           );
-
+          console.log("authorize 5");
           // If password is correct, return user
           if (isMatch) {
             return {
@@ -50,6 +55,7 @@ export const config = {
             };
           }
         }
+
         // If user does not exist or password does not match return null
         return null;
       },

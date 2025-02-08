@@ -16,3 +16,10 @@ export const signUpDefaultValues = {
   password: "",
   confirmPassword: "",
 };
+export const shippingAddressDefaultValues = {
+  fullName: "Endy Polanski",
+  streetAddress: "123 Main St",
+  city: "Paris",
+  postalCode: "12345",
+  country: "MAGA",
+};

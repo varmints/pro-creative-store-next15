@@ -1,18 +1,20 @@
 import { z } from "zod";
 import {
   insertProductSchema,
-  cartItemSchema,
   insertCartSchema,
+  cartItemSchema,
   shippingAddressSchema,
   insertOrderItemSchema,
   insertOrderSchema,
-} from "@/lib/validator";
+  paymentResultSchema,
+  insertReviewSchema,
+} from "@/lib/validators";
 
 export type Product = z.infer<typeof insertProductSchema> & {
   id: string;
-  createdAt: Date;
   rating: string;
   numReviews: number;
+  createdAt: Date;
 };
 
 export type Cart = z.infer<typeof insertCartSchema>;
@@ -26,6 +28,13 @@ export type Order = z.infer<typeof insertOrderSchema> & {
   paidAt: Date | null;
   isDelivered: Boolean;
   deliveredAt: Date | null;
-  orderItems: OrderItem[];
+  orderitems: OrderItem[];
   user: { name: string; email: string };
+  paymentResult: PaymentResult;
+};
+export type PaymentResult = z.infer<typeof paymentResultSchema>;
+export type Review = z.infer<typeof insertReviewSchema> & {
+  id: string;
+  createdAt: Date;
+  user?: { name: string };
 };
